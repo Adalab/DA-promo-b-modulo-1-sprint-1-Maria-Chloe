@@ -37,20 +37,35 @@ id_empleado INT NOT NULL,
 id_cliente INT NOT NULL,
 id_zapatilla INT NOT NULL,
 PRIMARY KEY (id_factura),
-INDEX `fk_id_empleado` (id_empleado)
+INDEX `fk_id_empleado` (id_empleado),
 CONSTRAINT `fk_id_empleado`
 FOREIGN KEY (`id_empleado`)
 REFERENCES `empleados`(id_empleado),
-INDEX `fk_id_cliente` (id_cliente)
+INDEX `fk_id_cliente` (id_cliente),
 CONSTRAINT `fk_id_cliente`
 FOREIGN KEY (`id_cliente`) 
 REFERENCES `clientes`(id_cliente),
-INDEX `fk_id_zapatilla` (id_zapatilla)
+INDEX `fk_id_zapatilla` (id_zapatilla),
 CONSTRAINT `fk_id_zapatilla`
 FOREIGN KEY (`id_zapatilla`)
 REFERENCES `zapatillas`(id_zapatilla)
 );
 
+
+ALTER TABLE zapatillas 
+ADD COLUMN marca VARCHAR(45) NOT NULL,
+ADD COLUMN talla INT NOT NULL;
+
+
+ALTER TABLE empleados 
+MODIFY COLUMN salario FLOAT;
+
+ALTER TABLE clientes
+DROP COLUMN pais,
+MODIFY COLUMN codigo_postal INT(5);
+
+ALTER TABLE facturas
+ADD COLUMN total FLOAT DEFAULT NULL;
 
 
 
